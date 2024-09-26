@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api key</title>
+</head>
+    <style>
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: azure;
+    }
+    </style>
+<body>
+       <div class="container">
+        <input type="text" placeholder="Moive........ " id="moiveId"><br><br>
+         <button onclick="moive()">submit</button>
+         <div id="details">
+
+         </div>
+       </div>
+       
+     
+
+
+
+
+       <script>
+            function moive(){
+            let moivename=document.getElementById("moiveId").value;
+            fetch(`http://www.omdbapi.com/?t=${moivename}&apikey=2f28ca3e`).then(response => response.json())
+            .then(data=>
+            {
+             let{ Title,Year,Rated,Released,Director,Writer,Poster,Genre,Language}=data;
+             document.getElementById("details").innerHTML=`
+             <img src=${Poster}/>
+             
+             <h2>${Title} ${Year}</h2>
+             
+             <ul>
+          <li><strong>Released:</strong>${Released}</li>
+          <li><strong>Genre:</strong>${Genre}</li>
+          <li><strong>Director:</strong>${Director}</li>
+          <li><strong>writer:</strong>${Writer}</li>
+          <li><strong>Rated:</strong>${Rated}</li>
+          <li><strong>Language:</strong>${Language}</li>
+     </ul>`;   
+
+            })
+              
+            }
+
+            
+       </script>
+</body>
+</html>
